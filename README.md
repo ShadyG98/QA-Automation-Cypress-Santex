@@ -1,3 +1,180 @@
+## 🌐 Idiomas / Languages
+- 🇪🇸 [Español](#-explicación-en-español)
+- 🇬🇧 [English](#-explanation-in-english)
+
+## 🇬🇧 Explanation in English
+
+## XAcademy
+## QA Automation
+### Trello: https://trello.com/b/d95n96JT/saucedemo-qa-automation 
+### Test Plan: https://docs.google.com/spreadsheets/d/1z88R_VCYDiSMn8zNHTPlWinaPwejp6it/edit?gid=1761268626#gid=1761268626 
+
+## Final Project
+
+1. Create a test plan to later automate it
+2. Have Cypress installed
+3. Create the test “myTestSaucedemo.cy.js”
+4. On the following site: https://www.saucedemo.com, create the tests:
+4.1. Purchase with user 1 <br>
+4.1.1. Login with user “standard_user” <br>
+4.1.2. Add products to the cart <br>
+4.1.3. Perform the checkout <br>
+4.1.4. Validate that the checkout was completed <br>
+4.1.5. Logout <br>
+4.2. Purchase with user 2 <br>
+4.2.1. Login with user “problem_user” <br>
+4.2.2. Repeat steps 4.1.2, 4.1.3, 4.1.4, 4.1.5
+
+5. Use the Trello incident management tool and report defects or improvements detected using the following incident template <br>
+6. Delivery format: Upload the project to GitHub and attach the repository link to the submission <br>
+
+Evaluation Criteria: <br>
+● Apply everything learned <br>
+● Understanding and application: The understanding and correct application of the concepts learned during the course, as reflected in the final project, will be evaluated. <br>
+● Use of best practices: The code should demonstrate good practices in test automation. <br>
+
+Tool Usage <br>
+●  Flexibility in tool selection: Students can use any additional tools they consider useful to complete the project, besides Cypress. <br>
+
+Test Plan <br>
+●  Presence of a test plan: It is essential to have a well-defined test plan. <br>
+●  Clarity and detail: The test plan should be clear and detailed, with precise descriptions of the test cases. <br>
+
+Test Automation <br>
+●  Requirement compliance: Automated tests must meet the requirements specified in the final project. <br>
+●  Validations and Verifications: Tests must include proper validations and verifications to ensure results are correct. <br>
+
+## Project Initialization
+
+Project folder creation and management
+1. Initial command: `npm install cypress --save-dev`
+2. Use the command `npx cypress open` once the Cypress modules are correctly installed.
+3. Configure the test type and add the files. The version used will be Chrome v131.
+4. Create the file according to the instructions: `myTestSaucedemo.cy.js` in the e2e folder. To maintain order, create a folder called Saucedemo. Then move the file inside that folder for a more organized project structure.
+5. One major issue found was that the Saucedemo site has problems with images not loading correctly.
+Issue thread: https://github.com/cypress-io/cypress/issues/27501
+6. The last product on the list, the red t-shirt, had a problem with its ID. I found a different solution for this particular case: use the data-test attribute.
+```
+cy.get('[data-test="add-to-cart-test.allthethings()-t-shirt-(red)"]').click()
+//cy.get('#add-to-cart-test.allthethings()-t-shirt-(red)').click() -> this line was the one I replaced.
+---
+```
+7. Once most of the project worked correctly, I began refactoring the code. I realized many lines were repeated, so I decided to iterate and replace repetitions with a single method or store them in an array. I used ChatGPT to find better alternatives.
+8. At the end of the tests, I had to increase the loading time (`cy.wait`) to prevent failures and improve performance. Additionally, since the instructions mention products in plural, I iterated over all items. If any item was clicked when it shouldn’t or used by someone else, it might fail; however, I followed the instructions.
+9. I updated Trello and added all my tasks to maintain better organization, setting timelines and adjusting personal deadlines.
+10. I installed the Mocha report generator and used the `cypress-mochawesome-reporter` command. I added the corresponding files, included most possible commands, and prepared the report.
+11. Finally, I reviewed and updated GitHub, the report template, and edited the README with step-by-step instructions and all project materials.
+
+## Theoretical Material and Commands That Helped with Project Delivery
+
+#### Run specs & Use Mocha to Generate Reports
+1. Run all tests from the console
+To run all tests of a project, simply execute the following command in the terminal:
+`npx cypress run`
+​
+This command will find all specification files (spec files) in the cypress/e2e folder and execute them.
+Inside cypress.config.js, set the following configuration:
+```js
+const { defineConfig } = require("cypress");
+
+module.exports = defineConfig({
+   e2e: {
+    setupNodeEvents(on, config) {
+      // Other events..
+    },
+  },
+  video: true, // Save videos
+  screenshotOnRunFailure: true, // Save screenshots of failed tests
+  videosFolder: "cypress/videos", // Specify folder for videos
+  screenshotsFolder: "cypress/screenshots", // Specify folder for screenshots
+});
+```
+2. Run specific tests
+To run a specific file, pass the file path as an argument:
+```
+npx cypress run --spec cypress/e2e/file_name.cy.js
+```
+
+4. Run tests in a specific directory
+If tests are organized in subdirectories and you want to run all tests in a specific directory:
+```
+npx cypress run --spec cypress/e2e/directory_name/*
+```
+
+5. Run tests in interactive mode
+Open the Cypress UI to select and run tests manually using:
+```
+npx cypress open
+```
+
+This will open the Cypress interface where tests can be selected and run interactively.
+5. Run tests in a specific browser
+
+Specify the browser using the --browser option:
+npx cypress run ```--browser``` chrome
+Other supported browsers include Firefox, Edge, and Electron (Cypress’s default browser).
+
+6. Steps to generate a report:
+Install the cypress-mochawesome-reporter package to generate reports:
+```
+npm i cypress-mochawesome-reporter --save-dev
+```
+Modify cypress.config.js:
+```
+const { defineConfig } = require('cypress');
+
+module.exports = defineConfig({
+  reporter: 'cypress-mochawesome-reporter', // Set the reporter to use
+  e2e: {
+    setupNodeEvents(on, config) {
+      require('cypress-mochawesome-reporter/plugin')(on); // Configure Node events so the plugin works
+    },
+  },
+});
+```
+Update support/e2e.js:
+Import the reporter registration so Cypress knows to use this reporter:
+```
+import 'cypress-mochawesome-reporter/register'; // In e2e.js file
+```
+
+Run the tests:
+```
+npx cypress run
+```
+Reports will be generated in cypress/reports/html, including screenshots of failed tests and detailed statistics.
+To customize the report, add options in cypress.config.js:
+```
+charts: shows statistical charts
+reportPageTitle: custom title
+embeddedScreenshots: include screenshots in HTML
+inlineAssets: include assets directly in the file
+const { defineConfig } = require("cypress");
+
+module.exports = defineConfig({
+  reporter: 'cypress-mochawesome-reporter',
+  // ---------- New lines ----------
+  reporterOptions: {
+    charts: true,
+    reportPageTitle: 'My Report',
+    embeddedScreenshots: true,
+    inlineAssets: true,   
+  },
+ ------------------------------
+  e2e: {
+    setupNodeEvents(on, config) {
+      require('cypress-mochawesome-reporter/plugin')(on);
+    },
+  },
+  video: true,
+  screenshotOnRunFailure: true,
+  videosFolder: "cypress/videos",
+  screenshotsFolder: "cypress/screenshots",
+});
+```
+
+## 🇪🇸 Explicación en Español
+
 ## XAcademy
 ## QA Automation
 ### Trello: https://trello.com/b/d95n96JT/saucedemo-qa-automation 
