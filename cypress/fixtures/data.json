@@ -1,13 +1,13 @@
 {    
-  "LoginStandard": {
-  "Username": "standard_user",
-  "Password": "secret_sauce"
-},
-"LoginProblem_user": {
-  "Username": "problem_user",
-  "Password": "secret_sauce"
-},
-  "PurchaseUser": {
+  "standard_user_login": {
+    "Username": "standard_user",
+    "Password": "secret_sauce"
+  },
+  "problem_user_login": {
+    "Username": "problem_user",
+    "Password": "secret_sauce"
+  },
+  "purchase_user_info": {
     "FirstName": "Brenda",
     "LastName": "Escobar",
     "postalCode": "5000"

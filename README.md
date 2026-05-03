@@ -13,7 +13,7 @@
 
 1. Create a test plan to later automate it
 2. Have Cypress installed
-3. Create the test “myTestSaucedemo.cy.js”
+3. Create the test “saucedemoTest.cy.js”
 4. On the following site: https://www.saucedemo.com, create the tests:
 4.1. Purchase with user 1 <br>
 4.1.1. Login with user “standard_user” <br>
@@ -50,8 +50,8 @@ Project folder creation and management
 1. Initial command: `npm install cypress --save-dev`
 2. Use the command `npx cypress open` once the Cypress modules are correctly installed.
 3. Configure the test type and add the files. The version used will be Chrome v131.
-4. Create the file according to the instructions: `myTestSaucedemo.cy.js` in the e2e folder. To maintain order, create a folder called Saucedemo. Then move the file inside that folder for a more organized project structure.
-5. One major issue found was that the Saucedemo site has problems with images not loading correctly.
+4. Create the file according to the instructions: `saucedemoTest.cy.js` in the e2e folder. To maintain order, create a folder called saucedemo. Then move the file inside that folder for a more organized project structure.
+5. One major issue found was that the saucedemo site has problems with images not loading correctly.
 Issue thread: https://github.com/cypress-io/cypress/issues/27501
 6. The last product on the list, the red t-shirt, had a problem with its ID. I found a different solution for this particular case: use the data-test attribute.
 ```
@@ -184,7 +184,7 @@ module.exports = defineConfig({
 
 1. Generar un plan de pruebas para posteriormente automatizarlo
 2. Tener instalado cypress
-3. Crear el test “myTestSaucedemo.cy.js”
+3. Crear el test “saucedemoTest.cy.js”
 4. En el siguiente sitio: https://www.saucedemo.com, generar los tests:
 4.1. Compra con user 1 <br>
 4.1.1. Login con el usuario “standard_user” <br>
@@ -221,8 +221,8 @@ Creación de la carpeta y gestión del proyecto
 1. Comando inicial: `npm install cypress --save-dev.`
 2. Utilizo el comando npx cypress open una vez que los módulos de Cypress están instalados correctamente.
 3. Configuro el tipo de test y agrego los archivos. La versión que utilizaré es Chrome v131.
-4. Creo el archivo conforme a la consigna: `myTestSaucedemo.cy.js` en la carpeta e2e. Para mantener el orden, crearé una carpeta llamada Saucedemo. Luego moveré el archivo dentro de esa carpeta para tener una estructura más organizada en el proyecto.
-5. Uno de los mayores inconvenientes que encontré fue que el sitio Saucedemo tiene problemas con las imágenes, las cuales no cargan correctamente como deberían.
+4. Creo el archivo conforme a la consigna: `saucedemoTest.cy.js` en la carpeta e2e. Para mantener el orden, crearé una carpeta llamada saucedemo. Luego moveré el archivo dentro de esa carpeta para tener una estructura más organizada en el proyecto.
+5. Uno de los mayores inconvenientes que encontré fue que el sitio saucedemo tiene problemas con las imágenes, las cuales no cargan correctamente como deberían.
 Hilo del problema: https://github.com/cypress-io/cypress/issues/27501
 6. El último producto de la lista, la remera roja, tenía un problema con el ID. Busqué una solución diferente para este caso particular: usar el data-test.
 ```
@@ -341,3 +341,4 @@ module.exports = defineConfig({
   
 });
 ```
+

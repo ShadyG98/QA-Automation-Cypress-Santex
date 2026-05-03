@@ -1,5 +1,5 @@
 // Login with all users
-Cypress.Commands.add('LoginUser', (type) => {
+Cypress.Commands.add('login', (type) => {
     cy.fixture('data').then((data) => {
         const formData = data[type];
         cy.get('#user-name').clear().type(formData.Username);
@@ -9,7 +9,7 @@ Cypress.Commands.add('LoginUser', (type) => {
 });
 
 // Add products to the cart -> what happens if the user has left an item in the cart
-Cypress.Commands.add('AddProducts', () => {
+Cypress.Commands.add('addProductsToCart', () => {
     cy.wait(2000); // Waiting to ensure the page loads fully
     const productSelectors = [
         '#add-to-cart-sauce-labs-backpack',
@@ -28,7 +28,7 @@ Cypress.Commands.add('AddProducts', () => {
 });
 
 // Command for the checkout of user 1
-Cypress.Commands.add('PurchaseUser1', (type) => {
+Cypress.Commands.add('completeCheckout', (type) => {
     cy.fixture('data').then((data) => {
         const formData = data[type];
         cy.get('#checkout').click();
@@ -40,7 +40,7 @@ Cypress.Commands.add('PurchaseUser1', (type) => {
 });
 
 // Validate that the checkout has been completed
-Cypress.Commands.add('CheckoutValidation', () => {
+Cypress.Commands.add('validateCheckoutCompletion', () => {
     cy.contains('Payment Information:').should('exist');
     cy.get('[data-test="payment-info-value"]').should('exist');
     cy.contains('Shipping Information:').should('exist');
@@ -53,7 +53,7 @@ Cypress.Commands.add('CheckoutValidation', () => {
 });
 
 // Perform the logout
-Cypress.Commands.add('Logout', () => {
+Cypress.Commands.add('performLogout', () => {
     cy.fixture('data').then(() => {
         cy.get('#react-burger-menu-btn').click();
         cy.get('#logout_sidebar_link').click();
